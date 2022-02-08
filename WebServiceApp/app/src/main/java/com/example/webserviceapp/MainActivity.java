@@ -3,6 +3,7 @@ package com.example.webserviceapp;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,5 +40,11 @@ public class MainActivity extends AppCompatActivity{
         AsyncTaskApp app = new AsyncTaskApp();
         apiService =  app.retrofit.create(WebInterface.class);
 
+        buttonProgress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               new ProgressAsyncTask(progressDialog).execute();
+            }
+        });
     }
 }
