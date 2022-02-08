@@ -46,5 +46,13 @@ public class MainActivity extends AppCompatActivity{
                new ProgressAsyncTask(progressDialog).execute();
             }
         });
+
+        buttonImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String urlImgS = "https://www.altoadige.it/image/contentid/policy:1.2988296:1630949993/image.jpg?f=3x2&w=627&$p$f$w=6b4c25b";
+                new AnimalDownloadImage(imageView).execute(urlImgS);
+            }
+        });
     }
 }
