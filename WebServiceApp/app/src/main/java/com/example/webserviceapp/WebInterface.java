@@ -5,4 +5,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface WebInterface {
+    @GET("/")
+    Call<AnimalStatus> getStatus();
 }

@@ -6,7 +6,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AsyncTaskApp extends Application {
-    public static final String BASE_URL="https://dog.ceo/dog-api/";
+    public static final String BASE_URL="https://api.weather.gov";
     Retrofit retrofit = null;
 
     public AsyncTaskApp(){

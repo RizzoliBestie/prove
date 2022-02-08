@@ -12,6 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.InputStream;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity{
 
     /*
@@ -35,10 +39,9 @@ public class MainActivity extends AppCompatActivity{
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setMax(100);
 
-        WebInterface apiService = null;
-
         AsyncTaskApp app = new AsyncTaskApp();
-        apiService =  app.retrofit.create(WebInterface.class);
+
+        WebInterface apiService = app.retrofit.create(WebInterface.class);
 
         buttonProgress.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +55,26 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
                 String urlImgS = "https://www.altoadige.it/image/contentid/policy:1.2988296:1630949993/image.jpg?f=3x2&w=627&$p$f$w=6b4c25b";
                 new AnimalDownloadImage(imageView).execute(urlImgS);
+            }
+        });
+
+        buttonRetrofit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Call<AnimalStatus> call = apiService.getStatus();//GET http://api.myservice.com/users/antolezzi
+                call.enqueue(new Callback<AnimalStatus>() {
+                    @Override
+                    public void onResponse(Call<AnimalStatus> call, Response<AnimalStatus> response) {
+                        int statusCode = response.code();
+                        AnimalStatus wm = response.body();
+
+                        textView.setText(wm.status);
+                    }
+
+                    @Override
+                    public void onFailure(Call<AnimalStatus> call, Throwable t) {
+                    }
+                });
             }
         });
     }
